@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="estilo.css">
+    <script src="carrito.js" async></script>
+    <title>ALIANZAS | </title>
+</head>
+<body ng-app="mymodal">
+<div ng-controller="MainCtrl" class="container">
+  <h1>Iniciar Sesión</h1>
+  <button ng-click="toggleModal()" class="btn btn-default">Aceptar</button>
+    
+  <modal title="Login form" visible="showModal">
+    <form role="form">
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password" />
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </modal>
+</div>
+<script>
+var mymodal = angular.module('mymodal', []);
+
+mymodal.controller('MainCtrl', function ($scope) {
+    $scope.showModal = false;
+    $scope.toggleModal = function(){
+        $scope.showModal = !$scope.showModal;
+    };
+  });
+
+mymodal.directive('modal', function () {
+    return {
+      template: '<div class="modal fade">' + 
+          '<div class="modal-dialog">' + 
+            '<div class="modal-content">' + 
+              '<div class="modal-header">' + 
+                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' + 
+                '<h4 class="modal-title">{{ title }}</h4>' + 
+              '</div>' + 
+              '<div class="modal-body" ng-transclude></div>' + 
+            '</div>' + 
+          '</div>' + 
+        '</div>',
+      restrict: 'E',
+      transclude: true,
+      replace:true,
+      scope:true,
+      link: function postLink(scope, element, attrs) {
+        scope.title = attrs.title;
+
+        scope.$watch(attrs.visible, function(value){
+          if(value == true)
+            $(element).modal('show');
+          else
+            $(element).modal('hide');
+        });
+
+        $(element).on('shown.bs.modal', function(){
+          scope.$apply(function(){
+            scope.$parent[attrs.visible] = true;
+          });
+        });
+
+        $(element).on('hidden.bs.modal', function(){
+          scope.$apply(function(){
+            scope.$parent[attrs.visible] = false;
+          });
+        });
+      }
+    };
+  });
+</script>
+</body>
+<body>
+    <header>
+        <h1>Alianzas LORETO</h1>
+    </header>
+    <section class="contenedor">
+        <!-- Contenedor de elementos -->
+        <div class="contenedor-items">
+            <div class="item">
+                <span class="titulo-item">Carrara media caña</span>
+                <img src="img/anillo1.webp" alt="" class="img-item">
+                <p>Para nosotros este anillo es símbolo de pureza: los bordes de titanio acompañan al mármol de Carrara reconstituido a lo largo del anillo. El diseño es pulido para lograr un brillo inigualable que se complementa con los delicados destellos únicos de la piedra blanca.</p>
+                <span class="precio-item">$115.400,00</span>
+                <button class="boton-item">Agregar al Carrito</button>
+            </div>
+            <div class="item">
+                <span class="titulo-item">Titanio martillado y lapacho</span>
+                <img src="img/anillo2.webp" alt="" class="img-item">
+                <p>Este set de alianzas radica en la belleza de lo orgánico: aplicamos la clásica técnica del martillado sobre el titanio para conseguir estas exquisitas facetas. Se complementa con un interior en madera de Lapacho y un brillante cristal completa el diseño.</p>
+                <span class="precio-item">$141.100,00</span>
+                <button class="boton-item">Agregar al Carrito</button>
+            </div>
+            <div class="item">
+                <span class="titulo-item">Combinadas round</span>
+                <img src="img/anillo3.webp" alt="" class="img-item">
+                <p>Este juego de alianzas representan el YING YANG, un principio filosófico que describe dos fuerzas fundamentales opuestas y complementarias, que se encuentran en todas las cosas. Cada anillo parte de un aro interior de titanio, que se complementa con dos recubrimiento exteriores: uno es de fibra de carbono y el otro es de mármol de Carrara reconstituido. El anillo de Carrara incluye un cristal Swarovski.</p>
+                <span class="precio-item">$117.900,00</span>
+                <button class="boton-item">Agregar al Carrito</button>
+            </div>
+            <div class="item">
+                <span class="titulo-item">Carrara deluxe</span>
+                <img src="img/anillo4.webp" alt="" class="img-item">
+                <p>Para nosotros este juego de alianzas es símbolo de pureza: los bordes de titanio acompañan al mármol de Carrara reconstituido, a lo largo de cada anillo. El diseño es pulido para lograr un brillo inigualable que se complementa con los delicados destellos únicos de la piedra blanca. Uno de los anillos lleva tres cristales Swarovski en color dorado.</p>
+                <span class="precio-item">$130.400,00</span>
+                <button class="boton-item">Agregar al Carrito</button>
+            </div>
+            <div class="item">
+                <span class="titulo-item">Zirconio martilladas</span>
+                <img src="img/anillo5.webp" alt="" class="img-item">
+                <p>Este anillo radica en la belleza de lo orgánico: aplicamos la clásica técnica del martillado sobre el zirconio para conseguir exquisitas facetas de textura rústica y elegante. </p>
+                <span class="precio-item">$188.900,00</span>
+                <button class="boton-item">Agregar al Carrito</button>
+            </div>
+            <div class="item">
+                <span class="titulo-item">Acero damasco BT pulidas</span>
+                <img src="img/anillo6.webp" alt="" class="img-item">
+                <p>Inspirado en una técnica milenaria, este anillo se destaca por una una trama orgánica que emerge del crisol de los aceros que lo componen. La curva de la superficie acentúa y distorsiona las lineas dando como resultado un anillo único y salvaje. Su dureza lo hace muy resistente al paso del tiempo y cuenta con una superficie brillante solamente interrumpida por surcos opacos que completan el juego de contrastes de la trama.</p>
+                <span class="precio-item">$196.700,00</span>
+                <button class="boton-item">Agregar al Carrito</button>
+            </div>
+            
+        </div>
+        <!-- Carrito de Compras -->
+        <div class="carrito" id="carrito">
+            <div class="header-carrito">
+                <h2>Tu Carrito</h2>
+            </div>
+
+            <div class="carrito-items">
+                <!--
+                <div class="carrito-item">
+                    <img src="img/anillo1.webp" width="80px" alt="">
+                    <div class="carrito-item-detalles">
+                        <span class="carrito-item-titulo">Carrara media caña</span>
+                        <div class="selector-cantidad">
+                            <i class="fa-solid fa-minus restar-cantidad"></i>
+                            <input type="text" value="1" class="carrito-item-cantidad" disabled>
+                            <i class="fa-solid fa-plus sumar-cantidad"></i>
+                        </div>
+                        <span class="carrito-item-precio">$115.400,00</span>
+                    </div>
+                   <span class="btn-eliminar">
+                        <i class="fa-solid fa-trash"></i>
+                   </span>
+                </div>
+                <div class="carrito-item">
+                    <img src="img/anillo2.webp" width="80px" alt="">
+                    <div class="carrito-item-detalles">
+                        <span class="carrito-item-titulo">Titanio martillado y lapacho</span>
+                        <div class="selector-cantidad">
+                            <i class="fa-solid fa-minus restar-cantidad"></i>
+                            <input type="text" value="3" class="carrito-item-cantidad" disabled>
+                            <i class="fa-solid fa-plus sumar-cantidad"></i>
+                        </div>
+                        <span class="carrito-item-precio">$141.100,00</span>
+                    </div>
+                   <button class="btn-eliminar">
+                        <i class="fa-solid fa-trash"></i>
+                   </button>
+                </div>
+                 -->
+            </div>
+            <div class="carrito-total">
+                <div class="fila">
+                    <strong>Tu Total</strong>
+                    <span class="carrito-precio-total">
+                        $538.700,00
+                    </span>
+                </div>
+                <button class="btn-pagar">Pagar <i class="fa-solid fa-bag-shopping"></i> </button>
+            </div>
+        </div>
+        
+    </section>
+</body>
+</html>
